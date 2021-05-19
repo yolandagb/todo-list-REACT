@@ -1,24 +1,73 @@
 import React from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import { useState, useEffect } from "react";
+import { checkPropTypes } from "prop-types";
 
 //create your first component
-export function Home() {
+export function Home(props) {
+	const useState = {
+		newItem: "",
+		list: ""
+	};
+	function updateInput(key, value) {
+		this.setState({
+			[key]: value
+		});
+	}
+	function addItem() {
+		//crear item con único id
+		const newItem = {
+			id: 1 + Math.random(),
+			value: this.state.newItem.slice()
+		};
+		// copiar la lista actual de items
+		const list = [...this.state.list];
+
+		// añadir nuevo item
+		list.push(newItem);
+
+		// actualizar stado con una nueva lista y rsetearlo a newitem input
+		this.setState({
+			list,
+			newItem: ""
+		});
+	}
+	function deleteItem(id) {
+		//copia de los items en la lista
+
+		const list = [...this.state.list];
+
+		// filtro de los items borrados
+		const updatedList = list.filter(item => item.id !== id);
+
+		this.setState({ list: updatedList });
+	}
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="todo-list">
+			<div>
+				Add item ...
+				<br />
+				<input
+					type="text"
+					placeholder="Tyoe item here..."
+					value={useState.newItem}
+					onChange={e => this.updateInput("newItem", e.target)}
+				/>
+				<button onClick={() => this.addItem()}>Add</button>
+				<br />
+				<ul>
+					{this.state.list.map(item => {
+						return (
+							<li key={item.id}>
+								{item.value}
+								<buttom
+									onClick={() => this.deleteItem(item.id)}>
+									X
+								</buttom>
+							</li>
+						);
+					})}
+				</ul>
+			</div>
 		</div>
 	);
 }
