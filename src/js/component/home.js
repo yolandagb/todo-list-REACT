@@ -4,43 +4,55 @@ import { checkPropTypes } from "prop-types";
 
 //create your first component
 export function Home(props) {
-	const useState = {
-		newItem: "",
-		list: ""
+	const [todo, setTodo] = useState(["Make the bed ", " Wash my hands"]);
+	const [inputValue, setInputValue] = useState("");
+
+	const handleClick = () => {
+		const newTodo = todo;
+		newTodo.push(inputValue);
+		setTodo(newTodo);
+		console.log(todo, ["Esto es todo"]);
+		setInputValue("");
 	};
-	function updateInput(key, value) {
-		this.setState({
-			[key]: value
-		});
-	}
-	function addItem() {
-		//crear item con único id
-		const newItem = {
-			id: 1 + Math.random(),
-			value: this.state.newItem.slice()
-		};
-		// copiar la lista actual de items
-		const list = [...this.state.list];
 
-		// añadir nuevo item
-		list.push(newItem);
+	const deleteItem = (index, event) => {
+		let newTodo = [...todo];
+		let removed = newTodo.splice(index, 1);
+		setTodo(newTodo);
+	};
+	// function updateInput(key, value) {
+	// 	this.setState({
+	// 		[key]: value
+	// 	});
+	// }
+	// function addItem() {
+	// 	//crear item con único id
+	// 	const newItem = {
+	// 		id: 1 + Math.random(),
+	// 		value: this.state.newItem.slice()
+	// 	};
+	// 	// copiar la lista actual de items
+	// 	const list = [...this.state.list];
 
-		// actualizar stado con una nueva lista y rsetearlo a newitem input
-		this.setState({
-			list,
-			newItem: ""
-		});
-	}
-	function deleteItem(id) {
-		//copia de los items en la lista
+	// 	// añadir nuevo item
+	// 	list.push(newItem);
 
-		const list = [...this.state.list];
+	// 	// actualizar stado con una nueva lista y rsetearlo a newitem input
+	// 	this.setState({
+	// 		list,
+	// 		newItem: ""
+	// 	});
+	// }
+	// function deleteItem(id) {
+	// 	//copia de los items en la lista
 
-		// filtro de los items borrados
-		const updatedList = list.filter(item => item.id !== id);
+	// 	const list = [...this.state.list];
 
-		this.setState({ list: updatedList });
-	}
+	// 	// filtro de los items borrados
+	// 	const updatedList = list.filter(item => item.id !== id);
+
+	// 	this.setState({ list: updatedList });
+	// }
 	return (
 		<div className="todo-list">
 			<div>
@@ -48,14 +60,26 @@ export function Home(props) {
 				<br />
 				<input
 					type="text"
-					placeholder="Tyoe item here..."
-					value={useState.newItem}
-					onChange={e => this.updateInput("newItem", e.target)}
+					placeholder="Type item here..."
+					value={inputValue}
+					onChange={e => setInputValue(event.target.value)}
 				/>
-				<button onClick={() => this.addItem()}>Add</button>
+				<button onClick={handleClick}>Add</button>
 				<br />
 				<ul>
-					{this.state.list.map(item => {
+					{todo.map((item, index) => {
+						return (
+							<li key={index}>
+								{item}
+								<buttom onClick={e => deleteItem(index, event)}>
+									X
+								</buttom>
+							</li>
+						);
+					})}
+
+					<li>{todo}</li>
+					{/* {this.state.list.map(item => {
 						return (
 							<li key={item.id}>
 								{item.value}
@@ -65,7 +89,7 @@ export function Home(props) {
 								</buttom>
 							</li>
 						);
-					})}
+					})} */}
 				</ul>
 			</div>
 		</div>
