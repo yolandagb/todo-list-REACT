@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { checkPropTypes } from "prop-types";
+import "../../styles/home.scss";
 
 //create your first component
 export function Home(props) {
@@ -55,23 +56,24 @@ export function Home(props) {
 	// }
 	return (
 		<div className="todo-list">
-			<div>
-				Add item ...
+			<div className="add-item-container">
+				<div className="text-center">Add item ...</div>
 				<br />
 				<input
+					className="inputs-container"
 					type="text"
 					placeholder="Type item here..."
 					value={inputValue}
 					onChange={e => setInputValue(event.target.value)}
 				/>
-				<button onClick={handleClick}>Add</button>
+				<button onClick className="add-button">={handleClick}>Add</button>
 				<br />
 				<ul>
 					{todo.map((item, index) => {
 						return (
-							<li key={index}>
+							<li className="key" key={index}>
 								{item}
-								<buttom onClick={e => deleteItem(index, event)}>
+								<buttom className="delete-button"onClick={e => deleteItem(index, event)}>
 									X
 								</buttom>
 							</li>
