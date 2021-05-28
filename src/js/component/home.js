@@ -57,30 +57,34 @@ export function Home(props) {
 	return (
 		<div className="todo-list">
 			<div className="add-item-container">
-				<div className="text-center">Add item ...</div>
+				<div className="text-center">Add item</div>
 				<br />
 				<input
 					className="inputs-container"
 					type="text"
-					placeholder="Type item here..."
+					placeholder="What needs to be done"
 					value={inputValue}
 					onChange={e => setInputValue(event.target.value)}
 				/>
-				<button onClick className="add-button">={handleClick}>Add</button>
+				<button onClick className="add-button">
+					{handleClick}Add
+				</button>
 				<br />
 				<ul>
 					{todo.map((item, index) => {
 						return (
 							<li className="key" key={index}>
 								{item}
-								<buttom className="delete-button"onClick={e => deleteItem(index, event)}>
+								<buttom
+									className="delete-button"
+									onClick={e => deleteItem(index, event)}>
 									X
 								</buttom>
 							</li>
 						);
 					})}
 
-					<li>{todo}</li>
+					{/* <li>{todo}</li> */}
 					{/* {this.state.list.map(item => {
 						return (
 							<li key={item.id}>
