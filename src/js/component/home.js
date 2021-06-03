@@ -66,8 +66,8 @@ export function Home(props) {
 					value={inputValue}
 					onChange={e => setInputValue(event.target.value)}
 				/>
-				<button onClick className="add-button">
-					{handleClick}Add
+				<button onClick={handleClick} className="add-button">
+					Add
 				</button>
 				<br />
 				<ul>
