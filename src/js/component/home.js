@@ -12,7 +12,6 @@ export function Home(props) {
 		const newTodo = todo;
 		newTodo.push(inputValue);
 		setTodo(newTodo);
-		console.log(todo, ["Esto es todo"]);
 		setInputValue("");
 	};
 
@@ -42,13 +41,11 @@ export function Home(props) {
 						return (
 							<li className="key" key={index}>
 								{item}
-								<div className="delete-container">
-									<buttom
-										className="delete-button"
-										onClick={e => deleteItem(index, event)}>
-										X
-									</buttom>
-								</div>
+								<buttom
+									className="delete-button"
+									onClick={e => deleteItem(index, event)}>
+									X
+								</buttom>
 							</li>
 						);
 					})}
