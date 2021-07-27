@@ -41,11 +41,11 @@ export function Home(props) {
 						return (
 							<li className="key" key={index}>
 								{item}
-								<buttom
+								<button
 									className="delete-button"
 									onClick={e => deleteItem(index, event)}>
 									X
-								</buttom>
+								</button>
 							</li>
 						);
 					})}
